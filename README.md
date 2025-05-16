@@ -11,22 +11,25 @@ Follow these steps to set up and run the project locally.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
-```
+git clone https://github.com/piotrfrukacz/soxo-todos.git
+cd soxo-todos
 
 ### 2. Install Dependencies
 
 Make sure you have Node.js and npm installed and use command below:
 
 ```
+
 npm install
+
 ```
 
 ### 3. Run the Development Server
 
 ```
+
 npm run dev
+
 ```
 
 The app should now be running at http://localhost:3000
@@ -34,8 +37,10 @@ The app should now be running at http://localhost:3000
 ### 4. Build for Production
 
 ```
+
 npm run build
 npm start
+
 ```
 
 ### 🧪 5. Running Tests
@@ -43,7 +48,9 @@ npm start
 To run unit and integration tests:
 
 ```
+
 npm run test
+
 ```
 
 ### Requirements
@@ -51,3 +58,4 @@ npm run test
 - Node.js 18+ recommended
 
 - npm
+```
