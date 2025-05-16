@@ -23,10 +23,18 @@ export const Chips = () => {
   );
 
   return (
-    <Box sx={{ mt: 2, mb: -1, display: "flex", justifyContent: "right" }}>
-      <Chip label={`ALL ${all}`} color="primary" />
-      <Chip label={`COMPLETED ${completed}`} color="success" sx={{ mx: 2 }} />
-      <Chip label={`INCOMPLETE ${inComplete}`} color="error" />
+    <Box sx={{ mt: 2, mb: -1, display: "flex-wrap", justifyContent: "right" }}>
+      <Chip label={`ALL ${all}`} color="primary" sx={{ ml: 1, my: 0.5 }} />
+      <Chip
+        label={`COMPLETED ${completed}`}
+        color="success"
+        sx={{ ml: 1, my: 0.5 }}
+      />
+      <Chip
+        label={`INCOMPLETE ${inComplete}`}
+        color="error"
+        sx={{ ml: 1, my: 0.5 }}
+      />
     </Box>
   );
 };

@@ -4,7 +4,7 @@ import { createContext, useContext } from "react";
 import { Todo } from "../../_reducers/TodoReducer";
 import { Filter } from "./TodoProvider";
 
-type TodoContextType = {
+export type TodoContextType = {
   todos: Todo[];
   filteredTodos: Todo[];
   newTodo: string;
