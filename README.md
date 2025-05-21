@@ -59,3 +59,28 @@ npm run test
 
 - npm
 ```
+
+
+## Project structure
+
+📁/app
+    📁 _components
+        /shared            # global components
+
+    📁 /todos
+            page.tsx           # Todo list route
+        page.tsx               # Main page
+
+    📁 /modules
+        📁 /todos
+            📁 /components
+                TodoItem.tsx
+                TodoList.tsx
+            📁 /services
+                todoService.ts   # fetch logic
+            📁 /types
+                index.ts         # typy np. Todo
+            📁 /hooks
+                useTodos.ts      # custom hook
+        index.js                 # main todo list file
+

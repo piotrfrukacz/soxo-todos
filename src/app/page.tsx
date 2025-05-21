@@ -1,14 +1,22 @@
 "use client";
 
-import { ErrorAlert } from "./_components/ErrorAlert";
-import TodoApp from "./_components/TodoApp";
-import { TodoProvider } from "./_context/TodoContext/TodoProvider";
+import { Box } from "@mui/material";
+import Button from "@mui/material/Button";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <TodoProvider>
-      <ErrorAlert />
-      <TodoApp />
-    </TodoProvider>
+    <Box
+      display={"flex"}
+      alignItems="center"
+      justifyContent="center"
+      height="100vh"
+    >
+      <Link href="/todos">
+        <Button variant="contained" disableElevation>
+          Go to todo list
+        </Button>
+      </Link>
+    </Box>
   );
 }
