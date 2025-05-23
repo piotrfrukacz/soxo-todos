@@ -2,28 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { Filter, Todo } from "../types";
-import { getTodos } from "../services/todoService";
 
-export const useTodos = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
+export const useTodos = (
+  initialTodos: Todo[] = [],
+  initialError: string | undefined
+) => {
+  const [todos, setTodos] = useState<Todo[]>(initialTodos);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>();
+  const [error] = useState<string | undefined>(initialError);
   const [filter, setFilter] = useState<Filter>("all");
-
-  const fetchTodos = async () => {
-    try {
-      setLoading(true);
-
-      const todosData = await getTodos();
-      setTodos(todosData);
-
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setError("Something goes wrong");
-      setLoading(false);
-    }
-  };
 
   const deleteTodo = (id: number) => {
     const newTodos = todos.filter((todo) => todo.id !== id);
@@ -42,8 +29,23 @@ export const useTodos = () => {
   };
 
   useEffect(() => {
-    fetchTodos();
-  }, []);
+    if (initialTodos.length) {
+      setLoading(false);
+      return;
+    }
+  }, [initialTodos.length]);
+
+  useEffect(() => {
+    if (initialTodos.length) {
+      setLoading(false);
+      return;
+    }
+
+    if (initialError) {
+      setLoading(false);
+      return;
+    }
+  }, [initialTodos.length, initialError]);
 
   return {
     todos,

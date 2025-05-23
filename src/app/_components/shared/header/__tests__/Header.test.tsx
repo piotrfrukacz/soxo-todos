@@ -7,7 +7,7 @@ describe("Header component", () => {
 
     render(<Header title={title} />);
 
-    const heading = screen.getByRole("heading", { level: 4 }); // h4
+    const heading = screen.getByRole("heading", { level: 4 });
 
     expect(heading).toBeInTheDocument();
     expect(heading).toHaveTextContent(title);

@@ -1,41 +1,29 @@
-import { Todo } from "../../types";
-import { getTodos } from "../todoService";
-
-global.fetch = jest.fn();
-
-const mockTodos: Todo[] = [
-  { userId: 1, id: 1, title: "Test todo 1", completed: false },
-  { userId: 1, id: 2, title: "Test todo 2", completed: true },
-];
+import { server } from "@/app/mocks/server";
+import { API_URL, getTodos } from "@/app/modules/todos/services/todoService";
+import { http, HttpResponse } from "msw";
 
 describe("getTodos", () => {
-  beforeEach(() => {
-    (fetch as jest.Mock).mockClear();
+  it("returns todos on success", async () => {
+    const { todos, error } = await getTodos();
+
+    expect(Array.isArray(todos)).toBe(true);
+    expect(todos.length).toBeGreaterThan(0);
+    expect(error).toBeUndefined();
   });
 
-  it("fetches and returns a list of todos", async () => {
-    (fetch as jest.Mock).mockResolvedValueOnce({
-      ok: true,
-      json: async () => mockTodos,
-    });
-
-    const result = await getTodos();
-
-    expect(fetch).toHaveBeenCalledWith(
-      "https://jsonplaceholder.typicode.com/todos?_limit=10"
+  it("returns error message on fetch failure", async () => {
+    server.use(
+      http.get(API_URL, () => {
+        return HttpResponse.json(
+          { message: "Internal Server Error" },
+          { status: 500 }
+        );
+      })
     );
-    expect(result).toEqual(mockTodos);
-  });
 
-  it("throws an error if the response is not OK", async () => {
-    const fakeResponse = {
-      ok: false,
-      status: 500,
-      statusText: "Internal Server Error",
-    };
+    const { todos, error } = await getTodos();
 
-    (fetch as jest.Mock).mockResolvedValueOnce(fakeResponse);
-
-    await expect(getTodos()).rejects.toBe(fakeResponse);
+    expect(todos).toEqual([]);
+    expect(error).toBe("Something goes wrong");
   });
 });

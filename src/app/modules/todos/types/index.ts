@@ -8,3 +8,8 @@ export interface Todo {
 }
 
 export type Filter = (typeof FILTERS)[number];
+
+export type GetTodos = {
+  todos: Todo[];
+  error?: string;
+};

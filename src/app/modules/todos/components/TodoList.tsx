@@ -6,12 +6,18 @@ import { TodoItem } from "./TodoItem";
 import { Loading } from "@/app/_components/shared/loading/Loading";
 import TotalItems from "@/app/_components/shared/total/TotalItems";
 import Filter from "@/app/_components/shared/filter/Filter";
+import { Todo } from "../types";
 
 export const FILTERS = ["all", "completed", "incomplete"] as const;
 
-const TodoList = () => {
+type Props = {
+  initialTodos: Todo[];
+  error?: string | undefined;
+};
+
+const TodoList = ({ initialTodos, error }: Props) => {
   const { todos, loading, filter, deleteTodo, toggleTodo, changeFilter } =
-    useTodos();
+    useTodos(initialTodos, error);
 
   const filteredTodos = todos.filter((todo) => {
     if (filter === "completed") {

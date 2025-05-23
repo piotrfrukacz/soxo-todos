@@ -16,7 +16,6 @@ type Props = {
 
 export default function Filter({ changeFilter, filters, filter }: Props) {
   const handleChange = (event: SelectChangeEvent) => {
-    console.log("xxx", event.target.value);
     changeFilter(event.target.value as FilterType);
   };
 

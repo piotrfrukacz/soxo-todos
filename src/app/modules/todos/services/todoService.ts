@@ -1,13 +1,15 @@
-import { Todo } from "../types";
+import { GetTodos, Todo } from "../types";
 
-const API_URL = "https://jsonplaceholder.typicode.com/todos?_limit=10";
+export const API_URL = "https://jsonplaceholder.typicode.com/todos?_limit=10";
 
-export const getTodos = async (): Promise<Todo[]> => {
+export const getTodos = async (): Promise<GetTodos> => {
   const res = await fetch(API_URL);
 
-  if (!res.ok) throw res;
+  if (!res.ok) {
+    return { todos: [], error: "Something goes wrong" };
+  }
 
   const data: Todo[] = await res.json();
 
-  return data;
+  return { todos: data, error: undefined };
 };

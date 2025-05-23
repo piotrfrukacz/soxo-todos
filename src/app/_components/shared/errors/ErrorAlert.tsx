@@ -1,14 +1,14 @@
-"use client";
-
-import { useTodos } from "@/app/modules/todos/hooks/useTodos";
 import { Alert } from "@mui/material";
 
-export const ErrorAlert = () => {
-  const { error } = useTodos();
+type Props = {
+  errorMessage?: string | undefined;
+};
+
+export const ErrorAlert = ({ errorMessage }: Props) => {
   return (
-    error && (
+    errorMessage && (
       <Alert severity="error" sx={{ mb: 2 }}>
-        {error}
+        {errorMessage}
       </Alert>
     )
   );

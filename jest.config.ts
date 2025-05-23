@@ -8,10 +8,16 @@ const createJestConfig = nextJest({
 const config: Config = {
   coverageProvider: "v8",
   collectCoverage: true,
-  testEnvironment: "jsdom",
+  testEnvironment: "jest-fixed-jsdom",
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
+  },
+  testEnvironmentOptions: {
+    customExportConditions: [""],
+  },
+  globals: {
+    fetch: globalThis.fetch,
   },
 };
 
